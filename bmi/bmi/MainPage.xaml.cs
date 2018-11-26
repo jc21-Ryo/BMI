@@ -20,19 +20,42 @@ namespace bmi
         {
             float height = float.Parse(EntryHeight.Text);
             float weight = float.Parse(EntryWeight.Text);
-            height = height * height;
-            weight = weight / height;
 
-            Navigation.PushModalAsync(new NavigationPage(new NextPage1(weight)));
+            if (height < 3)
+            {
+                height = height * height;
+                weight = weight / height;
+
+                Navigation.PushModalAsync(new NavigationPage(new NextPage1(weight)));
+            }
+            else
+            {
+                height = height / 100;
+                height = height * height;
+                weight = weight / height;
+
+                Navigation.PushModalAsync(new NavigationPage(new NextPage1(weight)));
+            }
         }
 
         private void ButtonBMI_Clicked(object sender, EventArgs e)
         {
             float height = float.Parse(EntryHeight.Text);
-            height = height * height;
             float weight = float.Parse(EntryWeight.Text);
-            weight = weight / height;
-            LabelResult.Text = "BMI:"+ weight;
+
+            if (height < 3)
+            {
+                height = height * height;
+                weight = weight / height;
+                LabelResult.Text = "BMI:" + weight;
+            }
+            else
+            {
+                height = height / 100;
+                height = height * height;
+                weight = weight / height;
+                LabelResult.Text = "BMI:" + weight;
+            }
         }
 
     }
